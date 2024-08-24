@@ -1,0 +1,295 @@
+2024-08-24 23:21:36,596 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-08-24 23:21:36,629 INFO o.s.b.StartupInfoLogger [main] Starting EcommerceApplication using Java 21.0.2 with PID 8160 (C:\Users\ngoho\IdeaProjects\ecommerce\ecommerce\target\classes started by ngoho in C:\Users\ngoho\IdeaProjects\ecommerce)
+2024-08-24 23:21:36,630 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-24 23:21:36,631 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-08-24 23:21:37,359 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 23:21:37,439 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 73 ms. Found 7 JPA repository interfaces.
+2024-08-24 23:21:38,013 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8080 (http)
+2024-08-24 23:21:38,023 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:21:38,025 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-08-24 23:21:38,025 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-24 23:21:38,074 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-08-24 23:21:38,075 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1392 ms
+2024-08-24 23:21:38,214 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 23:21:38,278 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-24 23:21:38,307 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-08-24 23:21:38,585 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 23:21:38,611 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-08-24 23:21:38,746 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5bde6148
+2024-08-24 23:21:38,749 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-08-24 23:21:39,752 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 23:21:39,860 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:21:40,179 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtTokenFilter' configured for use
+2024-08-24 23:21:40,199 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 23:21:40,401 INFO o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer [main] Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-08-24 23:21:40,402 WARN o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-08-24 23:21:40,651 WARN o.s.s.c.a.w.b.WebSecurity [main] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2024-08-24 23:21:41,049 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:21:41,067 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8080 (http) with context path '/'
+2024-08-24 23:21:41,074 INFO o.s.b.StartupInfoLogger [main] Started EcommerceApplication in 4.906 seconds (process running for 5.814)
+2024-08-24 23:21:45,959 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-24 23:21:45,960 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-08-24 23:21:45,961 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-08-24 23:21:45,979 INFO o.s.s.w.d.Logger [http-nio-8080-exec-1] 
+
+************************************************************
+
+Request received for GET '/api/v1/categories/4':
+
+org.apache.catalina.connector.RequestFacade@1cc9001a
+
+servletPath:/api/v1/categories/4
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwaG9uZU51bWJlciI6IjEyMzQiLCJ1c2VySWQiOjIsInN1YiI6IjEyMzQiLCJleHAiOjE3MjQ3Njg5OTN9.3K9e9RQazctyG38jYUKzzvpyPXfvOxgpCDpniRQp4Zs
+user-agent: PostmanRuntime/7.41.2
+accept: */*
+cache-control: no-cache
+postman-token: 081c42b7-f2a2-4803-8837-46c753971fcc
+host: localhost:8080
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+cookie: JSESSIONID=419D2D9FC5E921E9783FE0F4EF12FB1D
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtTokenFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2024-08-24 23:21:46,254 INFO c.n.e.c.CategoryController [http-nio-8080-exec-1] Getting category with id: 4
+2024-08-24 23:23:31,254 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:23:31,255 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-08-24 23:23:31,255 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-08-24 23:23:34,048 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-08-24 23:23:34,090 INFO o.s.b.StartupInfoLogger [main] Starting EcommerceApplication using Java 21.0.2 with PID 14520 (C:\Users\ngoho\IdeaProjects\ecommerce\ecommerce\target\classes started by ngoho in C:\Users\ngoho\IdeaProjects\ecommerce)
+2024-08-24 23:23:34,090 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-24 23:23:34,094 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-08-24 23:23:34,828 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 23:23:34,915 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 78 ms. Found 7 JPA repository interfaces.
+2024-08-24 23:23:35,485 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8080 (http)
+2024-08-24 23:23:35,496 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:23:35,498 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-08-24 23:23:35,498 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-24 23:23:35,546 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-08-24 23:23:35,547 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1408 ms
+2024-08-24 23:23:35,677 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 23:23:35,754 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-24 23:23:35,785 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-08-24 23:23:36,049 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 23:23:36,078 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-08-24 23:23:36,255 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cf230bf
+2024-08-24 23:23:36,257 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-08-24 23:23:37,326 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 23:23:37,440 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:23:37,756 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtTokenFilter' configured for use
+2024-08-24 23:23:37,775 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 23:23:38,000 INFO o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer [main] Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-08-24 23:23:38,001 WARN o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-08-24 23:23:38,251 WARN o.s.s.c.a.w.b.WebSecurity [main] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2024-08-24 23:23:38,605 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:23:38,621 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8080 (http) with context path '/'
+2024-08-24 23:23:38,629 INFO o.s.b.StartupInfoLogger [main] Started EcommerceApplication in 5.01 seconds (process running for 6.154)
+2024-08-24 23:23:51,881 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-24 23:23:51,882 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-08-24 23:23:51,883 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-08-24 23:23:51,904 INFO o.s.s.w.d.Logger [http-nio-8080-exec-1] 
+
+************************************************************
+
+Request received for GET '/api/v1/categories/4':
+
+org.apache.catalina.connector.RequestFacade@4752d515
+
+servletPath:/api/v1/categories/4
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwaG9uZU51bWJlciI6IjEyMzQiLCJ1c2VySWQiOjIsInN1YiI6IjEyMzQiLCJleHAiOjE3MjQ3Njg5OTN9.3K9e9RQazctyG38jYUKzzvpyPXfvOxgpCDpniRQp4Zs
+user-agent: PostmanRuntime/7.41.2
+accept: */*
+cache-control: no-cache
+postman-token: 9a513599-6b1a-4868-84b4-ff5711563a7c
+host: localhost:8080
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+cookie: JSESSIONID=419D2D9FC5E921E9783FE0F4EF12FB1D
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtTokenFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2024-08-24 23:23:52,205 INFO c.n.e.c.CategoryController [http-nio-8080-exec-1] Getting category with id: 4
+2024-08-24 23:23:59,004 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:23:59,005 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-08-24 23:23:59,011 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-08-24 23:28:31,321 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-08-24 23:28:31,356 INFO o.s.b.StartupInfoLogger [main] Starting EcommerceApplication using Java 21.0.2 with PID 10044 (C:\Users\ngoho\IdeaProjects\ecommerce\ecommerce\target\classes started by ngoho in C:\Users\ngoho\IdeaProjects\ecommerce)
+2024-08-24 23:28:31,356 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-24 23:28:31,357 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-08-24 23:28:32,243 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 23:28:32,346 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 92 ms. Found 7 JPA repository interfaces.
+2024-08-24 23:28:33,170 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8080 (http)
+2024-08-24 23:28:33,182 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:28:33,184 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-08-24 23:28:33,185 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-24 23:28:33,252 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-08-24 23:28:33,253 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1855 ms
+2024-08-24 23:28:33,440 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 23:28:33,555 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-24 23:28:33,622 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-08-24 23:28:34,023 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 23:28:34,059 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-08-24 23:28:34,247 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4045fd1f
+2024-08-24 23:28:34,251 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-08-24 23:28:35,647 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 23:28:35,769 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:28:36,183 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtTokenFilter' configured for use
+2024-08-24 23:28:36,207 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 23:28:36,446 INFO o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer [main] Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-08-24 23:28:36,447 WARN o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-08-24 23:28:36,815 WARN o.s.s.c.a.w.b.WebSecurity [main] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2024-08-24 23:28:37,292 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:28:37,310 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8080 (http) with context path '/'
+2024-08-24 23:28:37,318 INFO o.s.b.StartupInfoLogger [main] Started EcommerceApplication in 6.456 seconds (process running for 7.456)
+2024-08-24 23:28:40,257 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-24 23:28:40,257 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-08-24 23:28:40,258 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-08-24 23:28:40,280 INFO o.s.s.w.d.Logger [http-nio-8080-exec-2] 
+
+************************************************************
+
+Request received for GET '/api/v1/categories/4':
+
+org.apache.catalina.connector.RequestFacade@400a484d
+
+servletPath:/api/v1/categories/4
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwaG9uZU51bWJlciI6IjEyMzQiLCJ1c2VySWQiOjIsInN1YiI6IjEyMzQiLCJleHAiOjE3MjQ3Njg5OTN9.3K9e9RQazctyG38jYUKzzvpyPXfvOxgpCDpniRQp4Zs
+user-agent: PostmanRuntime/7.41.2
+accept: */*
+cache-control: no-cache
+postman-token: e5df36cc-2df9-4467-b637-dc1247278665
+host: localhost:8080
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+cookie: JSESSIONID=419D2D9FC5E921E9783FE0F4EF12FB1D
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtTokenFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2024-08-24 23:28:40,609 INFO c.n.e.c.CategoryController [http-nio-8080-exec-2] Getting category with id: 4
+2024-08-24 23:29:05,314 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:29:05,316 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-08-24 23:29:05,323 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-08-24 23:30:03,759 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-08-24 23:30:03,793 INFO o.s.b.StartupInfoLogger [main] Starting EcommerceApplication using Java 21.0.2 with PID 732 (C:\Users\ngoho\IdeaProjects\ecommerce\ecommerce\target\classes started by ngoho in C:\Users\ngoho\IdeaProjects\ecommerce)
+2024-08-24 23:30:03,793 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-24 23:30:03,794 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-08-24 23:30:04,519 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 23:30:04,605 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 77 ms. Found 7 JPA repository interfaces.
+2024-08-24 23:30:05,201 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8080 (http)
+2024-08-24 23:30:05,211 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:30:05,213 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-08-24 23:30:05,214 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-24 23:30:05,268 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-08-24 23:30:05,268 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1434 ms
+2024-08-24 23:30:05,426 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 23:30:05,505 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-24 23:30:05,544 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-08-24 23:30:05,844 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 23:30:05,870 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-08-24 23:30:06,017 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8debe42
+2024-08-24 23:30:06,019 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-08-24 23:30:07,015 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 23:30:07,123 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:30:07,453 DEBUG o.s.w.f.GenericFilterBean [main] Filter 'jwtTokenFilter' configured for use
+2024-08-24 23:30:07,472 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 23:30:07,677 INFO o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer [main] Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-08-24 23:30:07,678 WARN o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-08-24 23:30:07,915 WARN o.s.s.c.a.w.b.WebSecurity [main] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2024-08-24 23:30:08,268 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 23:30:08,284 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8080 (http) with context path '/'
+2024-08-24 23:30:08,292 INFO o.s.b.StartupInfoLogger [main] Started EcommerceApplication in 4.974 seconds (process running for 5.898)
+2024-08-24 23:30:10,663 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 23:30:10,665 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-08-24 23:30:10,673 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
