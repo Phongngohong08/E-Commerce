@@ -35,6 +35,13 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> {
                     requests
+
+                            // swagger
+                            .requestMatchers(GET, "/v3/api-docs/**").permitAll()
+                            .requestMatchers(GET, "/swagger-ui/index.html").permitAll()
+                            .requestMatchers(GET, "/swagger-ui/**").permitAll()
+                            .requestMatchers(GET, "/swagger-ui-custom.html").permitAll()
+
                             .requestMatchers(POST, String.format("%s/users/login", apiPrefix)).permitAll()
                             .requestMatchers(POST, String.format("%s/users/register", apiPrefix)).permitAll()
 

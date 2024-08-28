@@ -68,7 +68,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private boolean isBypassToken(@NonNull HttpServletRequest request) {
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
                 Pair.of(String.format("%s/users/register", apiPrefix), "POST"),
-                Pair.of(String.format("%s/users/login", apiPrefix), "POST")
+                Pair.of(String.format("%s/users/login", apiPrefix), "POST"),
+
+                // Swagger openapi
+                Pair.of("/v3/api-docs", "GET"),
+                Pair.of("/swagger-ui/index.html", "GET"),
+                Pair.of("/swagger-ui", "GET"),
+                Pair.of("/swagger-ui-custom.html", "GET")
         );
 
         String requestPath = request.getServletPath();
