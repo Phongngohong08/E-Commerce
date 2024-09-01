@@ -5,5 +5,5 @@ import com.nhp.ecommerce.models.Category;
 
 public interface CategoryService {
     Category createCategory(CategoryDTO category);
-    Category getCategoryById(long id) throws Exception;
+    Category getCategoryById(long id);
 }

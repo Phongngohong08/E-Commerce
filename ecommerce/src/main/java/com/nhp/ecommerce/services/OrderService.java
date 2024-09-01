@@ -5,6 +5,6 @@ import com.nhp.ecommerce.models.Order;
 
 public interface OrderService {
 
-    Order createOrder(OrderDTO orderDTO) throws Exception;
-    Order getOrderById(Long id) throws Exception;
+    Order createOrder(OrderDTO orderDTO);
+    Order getOrderById(Long id);
 }

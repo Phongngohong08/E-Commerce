@@ -1,6 +1,9 @@
 package com.nhp.ecommerce.controllers;
 
 import com.nhp.ecommerce.dtos.OrderDTO;
+import com.nhp.ecommerce.models.Order;
+import com.nhp.ecommerce.responses.ApiResponse;
+import com.nhp.ecommerce.responses.OrderResponse;
 import com.nhp.ecommerce.services.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +25,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<?> createOrder(@Valid @RequestBody OrderDTO orderDTO,
+    public ApiResponse<OrderResponse> createOrder(@Valid @RequestBody OrderDTO orderDTO,
                                          BindingResult result) {
         LOGGER.info("Creating order: {}", orderDTO);
         if (result.hasErrors()) {
@@ -30,22 +33,43 @@ public class OrderController {
                     .stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toList();
-            return ResponseEntity.badRequest().body(errorMessages);
+            return ApiResponse.<OrderResponse>builder()
+                    .message(errorMessages.toString())
+                    .build();
         }
-        try {
-            return ResponseEntity.ok(orderService.createOrder(orderDTO));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        Order order = orderService.createOrder(orderDTO);
+
+        return ApiResponse.<OrderResponse>builder()
+                .result(OrderResponse.builder()
+                        .id(order.getId())
+                        .address(order.getAddress())
+                        .phoneNumber(order.getPhoneNumber())
+                        .note(order.getNote())
+                        .paymentMethod(order.getPaymentMethod())
+                        .status(order.getStatus())
+                        .orderDate(order.getOrderDate())
+                        .total(order.getTotal())
+                        .build())
+                .build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderById(@PathVariable long id) {
-        try {
-            return ResponseEntity.ok(orderService.getOrderById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+    public ApiResponse<OrderResponse> getOrderById(@PathVariable long id) {
 
+        LOGGER.info("Getting order by id: {}", id);
+        Order order = orderService.getOrderById(id);
+
+        return ApiResponse.<OrderResponse>builder()
+                .result(OrderResponse.builder()
+                        .id(order.getId())
+                        .address(order.getAddress())
+                        .phoneNumber(order.getPhoneNumber())
+                        .note(order.getNote())
+                        .paymentMethod(order.getPaymentMethod())
+                        .status(order.getStatus())
+                        .orderDate(order.getOrderDate())
+                        .total(order.getTotal())
+                        .build())
+                .build();
+    }
 }

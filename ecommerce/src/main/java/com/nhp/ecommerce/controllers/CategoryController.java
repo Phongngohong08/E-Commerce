@@ -3,6 +3,7 @@ package com.nhp.ecommerce.controllers;
 import com.nhp.ecommerce.components.LocalizationUtil;
 import com.nhp.ecommerce.dtos.CategoryDTO;
 import com.nhp.ecommerce.models.Category;
+import com.nhp.ecommerce.responses.ApiResponse;
 import com.nhp.ecommerce.responses.CategoryResponse;
 import com.nhp.ecommerce.services.CategoryService;
 import com.nhp.ecommerce.utils.MessageKey;
@@ -27,29 +28,43 @@ public class CategoryController {
     private final LocalizationUtil localizationUtil;
 
     @PostMapping
-    public ResponseEntity<?> createCategory(@Valid @RequestBody CategoryDTO categoryDTO, BindingResult result) {
-        CategoryResponse categoryResponse = new CategoryResponse();
+    public ApiResponse<CategoryResponse> createCategory(@Valid @RequestBody CategoryDTO categoryDTO,
+                                                        BindingResult result) {
+
+        LOGGER.info("Creating category: {}", categoryDTO);
         if (result.hasErrors()) {
             List<String> errorMessages = result.getFieldErrors()
                     .stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toList();
-            categoryResponse.setMessage(localizationUtil.getLocalizedMessage(MessageKey.INSERT_CATEGORY_FAILED));
-            categoryResponse.setErrors(errorMessages);
-            return ResponseEntity.badRequest().body(categoryResponse);
+
+            return ApiResponse.<CategoryResponse>builder()
+                    .message(errorMessages.toString())
+                    .build();
         }
+
         Category category = categoryService.createCategory(categoryDTO);
-        categoryResponse.setCategory(category);
-        return ResponseEntity.ok(categoryResponse);
+
+        return ApiResponse.<CategoryResponse>builder()
+                .result(CategoryResponse.builder()
+                        .id(category.getId())
+                        .name(category.getName())
+                        .build())
+                .message(localizationUtil.getLocalizedMessage(MessageKey.INSERT_CATEGORY_SUCCESSFULLY))
+                .build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable long id) {
-        try {
-            LOGGER.info("Getting category with id: {}", id);
-            return ResponseEntity.ok(categoryService.getCategoryById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ApiResponse<CategoryResponse> getCategoryById(@PathVariable long id) {
+
+        Category category = categoryService.getCategoryById(id);
+
+        return ApiResponse.<CategoryResponse>builder()
+                .result(CategoryResponse.builder()
+                        .id(category.getId())
+                        .name(category.getName())
+                        .build())
+                .message(localizationUtil.getLocalizedMessage(MessageKey.GET_CATEGORY_SUCCESS))
+                .build();
     }
 }

@@ -1,6 +1,9 @@
 package com.nhp.ecommerce.controllers;
 
 
+import com.nhp.ecommerce.models.OrderDetail;
+import com.nhp.ecommerce.responses.ApiResponse;
+import com.nhp.ecommerce.responses.OrderDetailResponse;
 import com.nhp.ecommerce.services.OrderDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,17 @@ public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderDetailById(@PathVariable long id) {
-        try {
-            return ResponseEntity.ok(orderDetailService.getOrderDetailById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ApiResponse<OrderDetailResponse> getOrderDetailById(@PathVariable long id) {
+
+        OrderDetail orderDetail = orderDetailService.getOrderDetailById(id);
+
+        return ApiResponse.<OrderDetailResponse>builder()
+                .result(OrderDetailResponse.builder()
+                        .id(orderDetail.getId())
+                        .productId(orderDetail.getProductId())
+                        .orderId(orderDetail.getOrder().getId())
+                        .quantity(orderDetail.getQuantity())
+                        .build())
+                .build();
     }
 }

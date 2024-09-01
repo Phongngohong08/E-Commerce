@@ -1,6 +1,10 @@
 package com.nhp.ecommerce.controllers;
 
 import com.nhp.ecommerce.dtos.ProductDTO;
+import com.nhp.ecommerce.dtos.ProductImageDTO;
+import com.nhp.ecommerce.models.Product;
+import com.nhp.ecommerce.responses.ApiResponse;
+import com.nhp.ecommerce.responses.ProductResponse;
 import com.nhp.ecommerce.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,24 +31,30 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable long id) {
-        try {
-            return ResponseEntity.ok(productService.getProductById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ApiResponse<ProductResponse> getProductById(@PathVariable long id) {
+        LOGGER.info("Getting product with id: {}", id);
+        Product product = productService.getProductById(id);
+        return ApiResponse.<ProductResponse>builder()
+                .result(ProductResponse.builder()
+                        .id(product.getId())
+                        .name(product.getName())
+                        .build())
+                .build();
     }
 
     @GetMapping
-    public ResponseEntity<?> getProducts(
+    public ApiResponse<List<ProductResponse>> getProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int limit) {
         LOGGER.info("Getting products with page: {}, limit: {}", page, limit);
-        return ResponseEntity.ok(productService.getPageAndSortProduct(page, limit));
+        List<ProductResponse> productResponses = productService.getPageAndSortProduct(page, limit);
+        return ApiResponse.<List<ProductResponse>>builder()
+                .result(productResponses)
+                .build();
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO productDTO,
+    public ApiResponse<ProductResponse> createProduct(@Valid @RequestBody ProductDTO productDTO,
                                            BindingResult result) {
         LOGGER.info("Creating product with name: {}", productDTO.getName());
         if (result.hasErrors()) {
@@ -52,39 +62,48 @@ public class ProductController {
                     .stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toList();
-            return ResponseEntity.badRequest().body(errorMessages);
+            return ApiResponse.<ProductResponse>builder()
+                    .message(errorMessages.toString())
+                    .build();
         }
-        try {
-            return ResponseEntity.ok(productService.createProduct(productDTO));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        ProductResponse product = productService.createProduct(productDTO);
+        return ApiResponse.<ProductResponse>builder()
+                .result(ProductResponse.builder()
+                        .id(product.getId())
+                        .name(product.getName())
+                        .build())
+                .build();
     }
 
     @PostMapping(value = "/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImages(
+    public ApiResponse<List<ProductImageDTO>> uploadImages(
             @PathVariable("id") Long productId, @ModelAttribute("files") List<MultipartFile> files) {
 
-        try {
-            return ResponseEntity.ok(productService.createProductImage(productId, files));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        LOGGER.info("Uploading images for product with id: {}", productId);
+        List<ProductImageDTO> product = productService.createProductImage(productId, files);
+
+        return ApiResponse.<List<ProductImageDTO>>builder()
+                .result(product)
+                .build();
     }
 
     @GetMapping("/images/{imageName}")
-    public ResponseEntity<?> viewImage(@PathVariable String imageName) {
+    public ApiResponse<ProductImageDTO> viewImage(@PathVariable String imageName) {
+        LOGGER.info("Viewing image with name: {}", imageName);
+        Path path = Paths.get("uploads").resolve(imageName);
+        UrlResource resource = null;
         try {
-            Path imagePath = Paths.get("uploads/"+imageName);
-            UrlResource resource = new UrlResource(imagePath.toUri());
-
-            if (resource.exists()) {
-                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(resource);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
+            resource = new UrlResource(path.toUri());
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            LOGGER.error("Error viewing image with name: {}", imageName);
+            return ApiResponse.<ProductImageDTO>builder()
+                    .message("Error viewing image")
+                    .build();
         }
+        return ApiResponse.<ProductImageDTO>builder()
+                .result(ProductImageDTO.builder()
+                        .imageUrl(resource.getFilename())
+                        .build())
+                .build();
     }
 }

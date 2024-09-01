@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductResponse createProduct(ProductDTO productDTO) throws Exception;
-    Product getProductById(Long id) throws Exception;
-    List<ProductImageDTO> createProductImage(Long productId, List<MultipartFile> files) throws Exception;
+    ProductResponse createProduct(ProductDTO productDTO);
+    Product getProductById(Long id);
+    List<ProductImageDTO> createProductImage(Long productId, List<MultipartFile> files);
     List<ProductResponse> getPageAndSortProduct(int page, int size);
 }

@@ -4,7 +4,9 @@ package com.nhp.ecommerce.controllers;
 import com.nhp.ecommerce.components.LocalizationUtil;
 import com.nhp.ecommerce.dtos.LoginUserDTO;
 import com.nhp.ecommerce.dtos.RegisterUserDTO;
+import com.nhp.ecommerce.responses.ApiResponse;
 import com.nhp.ecommerce.responses.LoginResponse;
+import com.nhp.ecommerce.responses.RegisterUserResponse;
 import com.nhp.ecommerce.services.UserService;
 import com.nhp.ecommerce.utils.MessageKey;
 import jakarta.validation.Valid;
@@ -29,37 +31,37 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterUserDTO userDTO, BindingResult result) {
+    public ApiResponse<RegisterUserResponse> registerUser(@Valid @RequestBody RegisterUserDTO userDTO, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errorMessages = result.getFieldErrors()
                     .stream()
                     .map(FieldError::getDefaultMessage)
                     .toList();
-            return ResponseEntity.badRequest().body(errorMessages);
+            return ApiResponse.<RegisterUserResponse>builder()
+                    .message(errorMessages.toString())
+                    .build();
         }
-        try {
-            LOGGER.info("Registering user with phone number: {}", userDTO.getPhoneNumber());
-            userService.createUser(userDTO);
-            return ResponseEntity.ok(localizationUtil.getLocalizedMessage(MessageKey.REGISTER_SUCCESSFULLY));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        LOGGER.info("Registering user with phone number: {}", userDTO.getPhoneNumber());
+
+        userService.createUser(userDTO);
+        return ApiResponse.<RegisterUserResponse>builder()
+                .message(localizationUtil.getLocalizedMessage(MessageKey.REGISTER_SUCCESSFULLY))
+                .result(RegisterUserResponse.builder()
+                        .phoneNumber(userDTO.getPhoneNumber())
+                        .build())
+                .build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(
+    public ApiResponse<LoginResponse> login(
             @Valid @RequestBody LoginUserDTO userLoginDTO) {
-        try {
-            String token = userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
-            return ResponseEntity.ok(
-                    LoginResponse.builder()
-                            .message(localizationUtil.getLocalizedMessage(MessageKey.LOGIN_SUCCESSFULLY))
-                            .token(token).build());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(
-                    LoginResponse.builder()
-                            .message(e.getMessage()).build()
-            );
-        }
+        LOGGER.info("Logging in user with phone number: {}", userLoginDTO.getPhoneNumber());
+        String token =  userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
+        return ApiResponse.<LoginResponse>builder()
+                .message(localizationUtil.getLocalizedMessage(MessageKey.LOGIN_SUCCESSFULLY))
+                .result(LoginResponse.builder()
+                        .token(token)
+                        .build())
+                .build();
     }
 }

@@ -40,7 +40,7 @@ public class ImpProductService implements ProductService{
     private final LocalizationUtil localizationUtil;
 
     @Override
-    public ProductResponse createProduct(ProductDTO productDTO) throws Exception {
+    public ProductResponse createProduct(ProductDTO productDTO) {
         Category existingCategory = categoryService.getCategoryById(productDTO.getCategoryId());
 
         Product newProduct = Product.builder().name(productDTO.getName())
@@ -50,26 +50,32 @@ public class ImpProductService implements ProductService{
                 .build();
         productRepository.save(newProduct);
         return ProductResponse.builder()
-                .message(localizationUtil.getLocalizedMessage(
-                        localizationUtil.getLocalizedMessage(MessageKey.CREATE_PRODUCT_SUCCESSFULLY)))
                 .id(newProduct.getId())
                 .name(newProduct.getName())
                 .build();
     }
 
     @Override
-    public Product getProductById(Long id) throws DataNotFoundException {
-        return productRepository.findProductById(id)
-                .orElseThrow(() -> new DataNotFoundException("Cannot find product with id = " + id));
+    public Product getProductById(Long id) {
+        try {
+            return productRepository.findProductById(id)
+                    .orElseThrow(() -> new DataNotFoundException("Cannot find product with id = " + id));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public List<ProductImageDTO> createProductImage(Long productId, List<MultipartFile> files) throws Exception {
+    public List<ProductImageDTO> createProductImage(Long productId, List<MultipartFile> files) {
 
         Product existingProduct = getProductById(productId);
         files = files == null ? new ArrayList<>() : files;
         if(files.size() > ProductImage.MAXIMUM_IMAGES_PER_PRODUCT) {
-            throw new Exception("Maximum images per product is " + ProductImage.MAXIMUM_IMAGES_PER_PRODUCT);
+            try {
+                throw new Exception("Maximum images per product is " + ProductImage.MAXIMUM_IMAGES_PER_PRODUCT);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         List<ProductImageDTO> productImageDTOS = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -78,13 +84,26 @@ public class ImpProductService implements ProductService{
             }
 
             if(file.getSize() > 10 * 1024 * 1024) {
-                throw new Exception("Maximum file size is 10MB");
+                try {
+                    throw new Exception("Maximum file size is 10MB");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
             String contentType = file.getContentType();
             if(contentType == null || !contentType.startsWith("image/")) {
-                throw new Exception("Invalid image format");
+                try {
+                    throw new Exception("Invalid image format");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
-            String filename = storeFile(file);
+            String filename = null;
+            try {
+                filename = storeFile(file);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             ProductImage productImage = ProductImage.builder().url(filename).product(existingProduct).build();
             ProductImageDTO imageDTO = ProductImageDTO.builder()

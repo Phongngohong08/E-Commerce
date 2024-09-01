@@ -7,8 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductResponse {
+public class OrderDetailResponse {
 
     private Long id;
-    private String name;
+    private Long productId;
+    private Long orderId;
+    private int quantity;
 }

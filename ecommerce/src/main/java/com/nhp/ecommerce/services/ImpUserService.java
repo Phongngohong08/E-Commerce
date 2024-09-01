@@ -28,15 +28,24 @@ public class ImpUserService implements UserService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public void createUser(RegisterUserDTO userDTO) throws Exception {
+    public void createUser(RegisterUserDTO userDTO) {
         String phoneNumber = userDTO.getPhoneNumber();
         if(userRepository.existsByPhoneNumber(phoneNumber)) {
             throw new DataIntegrityViolationException("Phone number already exists");
         }
-        Role role = roleRepository.findById(userDTO.getRoleId())
-                .orElseThrow(() -> new DataNotFoundException("Role does not exist"));
+        Role role = null;
+        try {
+            role = roleRepository.findById(userDTO.getRoleId())
+                    .orElseThrow(() -> new DataNotFoundException("Role does not exist"));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if(!userDTO.getRetypePassword().equals(userDTO.getPassword())) {
-            throw new Exception("Password and retype password do not match");
+            try {
+                throw new Exception("Password and retype password do not match");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         User newUser = User.builder()
                 .name(userDTO.getName())
@@ -52,11 +61,15 @@ public class ImpUserService implements UserService {
     }
 
     @Override
-    public String login(String phoneNumber, String password) throws Exception {
+    public String login(String phoneNumber, String password) {
 
         Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
         if(optionalUser.isEmpty()) {
-            throw new DataNotFoundException("User does not exist");
+            try {
+                throw new DataNotFoundException("User does not exist");
+            } catch (DataNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
         User existingUser = optionalUser.get();
 
@@ -67,7 +80,11 @@ public class ImpUserService implements UserService {
         Long roleId = existingUser.getRole().getId();
         Optional<Role> optionalRole = roleRepository.findById(roleId);
         if(optionalRole.isEmpty() || !roleId.equals(existingUser.getRole().getId())) {
-            throw new DataNotFoundException("Role does not exist");
+            try {
+                throw new DataNotFoundException("Role does not exist");
+            } catch (DataNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -77,6 +94,10 @@ public class ImpUserService implements UserService {
         );
 
         authenticationManager.authenticate(authenticationToken);
-        return jwtTokenUtil.generateToken(existingUser);
+        try {
+            return jwtTokenUtil.generateToken(existingUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -26,10 +26,15 @@ public class ImpOrderService implements OrderService{
 
 
     @Override
-    public Order createOrder(OrderDTO orderDTO) throws Exception {
-        User user = userRepository
-                .findById(orderDTO.getUserId())
-                .orElseThrow(() -> new DataNotFoundException("Cannot find user with id: "+orderDTO.getUserId()));
+    public Order createOrder(OrderDTO orderDTO) {
+        User user;
+        try {
+            user = userRepository
+                    .findById(orderDTO.getUserId())
+                    .orElseThrow(() -> new DataNotFoundException("Cannot find user with id: "+orderDTO.getUserId()));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Order order = Order.builder()
                 .user(user)
                 .phoneNumber(user.getPhoneNumber())
@@ -46,8 +51,13 @@ public class ImpOrderService implements OrderService{
             OrderDetail orderDetail = new OrderDetail();
 
             Long productId = cartItemDTO.getProductId();
-            Product product = productRepository.findById(productId)
-                    .orElseThrow(() -> new DataNotFoundException("Product not found with id: " + productId));
+            Product product = null;
+            try {
+                product = productRepository.findById(productId)
+                        .orElseThrow(() -> new DataNotFoundException("Product not found with id: " + productId));
+            } catch (DataNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             orderDetail.setProductId(productId);
             orderDetail.setQuantity(cartItemDTO.getQuantity());
             orderDetails.add(orderDetail);
@@ -65,8 +75,12 @@ public class ImpOrderService implements OrderService{
     }
 
     @Override
-    public Order getOrderById(Long id) throws Exception {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Cannot find order with id: " + id));
+    public Order getOrderById(Long id){
+        try {
+            return orderRepository.findById(id)
+                    .orElseThrow(() -> new DataNotFoundException("Cannot find order with id: " + id));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

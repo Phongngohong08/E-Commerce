@@ -12,8 +12,12 @@ public class ImpOrderDetailService implements OrderDetailService{
     private final OrderDetailRepository orderDetailRepository;
 
     @Override
-    public OrderDetail getOrderDetailById(Long id) throws Exception {
-        return orderDetailRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Order detail not found with id: " + id));
+    public OrderDetail getOrderDetailById(Long id) {
+        try {
+            return orderDetailRepository.findById(id)
+                    .orElseThrow(() -> new DataNotFoundException("Order detail not found with id: " + id));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

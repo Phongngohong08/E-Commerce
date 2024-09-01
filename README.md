@@ -13,7 +13,7 @@ This project is responsible for:
 * DBMS: MySQL
 
 ## Prerequisites
-* Java SDK 21
+* Java JDK 21
 * A MySQL server
 
 ## Start application
@@ -23,4 +23,4 @@ This project is responsible for:
 `/mvnw package`
 
 ## Run application
-'java -jar .\ecommerce-0.0.1-SNAPSHOT.jar'
+`java -jar .\ecommerce-0.0.1-SNAPSHOT.jar`

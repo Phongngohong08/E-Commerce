@@ -23,8 +23,12 @@ public class ImpCategoryService implements CategoryService {
     }
 
     @Override
-    public Category getCategoryById(long id) throws DataNotFoundException {
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Category not found"));
+    public Category getCategoryById(long id){
+        try {
+            return categoryRepository.findById(id)
+                    .orElseThrow(() -> new DataNotFoundException("Category not found"));
+        } catch (DataNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
